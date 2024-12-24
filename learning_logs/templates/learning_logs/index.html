@@ -1,0 +1,22 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content1 %}
+
+    <head>
+        <title>学习日志</title>
+    </head>
+
+    <blockquote>
+        <i><p>Learning Log helps you keep track of your learning, for any topic you're interested in.</p></i>
+    </blockquote>
+    
+    <div id = "menu" style = "background-color:rgba(255, 255, 255, 0.5); float:left; width:200px; height:80vh;">
+
+        <h2>菜单</h2>
+
+        <h3 style = "text-align:center;">
+            <li><a href = "{% url 'learning_logs:topics' %}">主题</a></li>
+        </h3>
+    </div>
+
+{% endblock content1 %}

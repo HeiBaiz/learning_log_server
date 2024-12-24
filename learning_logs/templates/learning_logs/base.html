@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "{% static 'css/learning_logs/base.css' %}">
+    <style>
+
+        a {
+            text-decoration: none;
+            color: rgba(57, 197, 187);
+        }
+
+        a:hover {
+            color: rgba(119, 181, 234);
+        }
+        
+    </style>
+</head>
+<body>
+    <p>
+        {% comment %} 这个命名空间来自在文件 learning_logs/urls.py 中赋给 app_name 的值。 {% endcomment %}
+        <a href = "{% url 'start:index' %}">Index</a>
+        -<a href = "{% url 'learning_logs:index' %}"> Learning Log</a>
+        {% block content2 %} {% endblock content2 %}
+
+        {% if user.is_authenticated %}
+            <br/><pre style="font-size:20px">  Ciallo～(∠・ω< )⌒★, {{ user.username }}</pre>
+        {% else %}
+            -<a href="{% url 'accounts:register' %}"> Register</a>
+            -<a href="{% url 'accounts:login' %}"> Log in</a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <hr />
+            <form action="{% url 'accounts:logout' %}" method='post'>
+                {% csrf_token %}
+                <button name='submit'>Log out</button>
+            </form>
+        {% endif %}
+        
+    </pre>
+
+</body>
+</html>
+
+{% block content1 %} {% endblock content1 %}
