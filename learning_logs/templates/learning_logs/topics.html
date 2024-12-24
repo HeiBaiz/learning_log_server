@@ -1,27 +1,24 @@
 {% extends 'learning_logs/base.html' %}
 
-{% block content1 %}
 
-    <head>
-        <title>主题</title>
-    </head>
+{% block link %}
+    <a class="menu-link" href="{% url 'learning_logs:index' %}">- 学习日志</a>
+    <a class="menu-link" href="{% url 'learning_logs:topics' %}">- 主题</a>
+{% endblock link %}
 
-    <h1 style = "color:rgba(0,0,0,0.8)">Topics</h1>
+{% block page_header %}
+    <h1>Topics</h1>
+{% endblock page_header %}
 
-    <ul>
-        {% for topic in topics %}
-            <li>
-                <a href = {% url 'learning_logs:topic' topic.id %} style = "font-size:20px;">{{ topic.text }}</a>
-            </li>
-        {% empty %}
-            <li>No topics have been added yet.</li>
-        {% endfor %}
+{% block content %}
+    <ul class="list-group border-bottom pb-2 mb-4">
+    {% for topic in topics %}
+        <li class="list-group-item border-0">
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>
+        </li>
+    {% empty %}
+        <li class="list-group-item border-0">No topics have been added yet.</li>
+    {% endfor %}
     </ul>
-
     <a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
-
-{% endblock content1 %}
-
-{% block content2 %}
-    -<a href = "{% url 'learning_logs:topics' %}"> topics</a>
-{% endblock content2 %}
+{% endblock content %}

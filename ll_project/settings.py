@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'start',
     'accounts',
     
+    # 第三方应用程序
+    'django_bootstrap5',
+    
     # Django默认添加的应用程序
     
     'django.contrib.admin',
@@ -63,7 +66,7 @@ ROOT_URLCONF = 'll_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

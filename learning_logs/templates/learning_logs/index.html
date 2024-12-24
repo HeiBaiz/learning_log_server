@@ -1,22 +1,37 @@
 {% extends 'learning_logs/base.html' %}
 
-{% block content1 %}
+{% block link %}
+    <a class="menu-link" href="{% url 'learning_logs:index' %}">- 学习日志</a>
+{% endblock link %}
 
-    <head>
-        <title>学习日志</title>
-    </head>
+{% block page_header %}
+    <div class="p-3 mb-4 bg-light border rounded-3">
+        <div class="container-fluid py-4">
+            <h1 class="display-3">Track your learning.</h1>
+            <p class="lead">
+                Make your own Learning Log, and keep a list of the
+                topics you're learning about. Whenever you learn something new
+                about a topic, make an entry summarizing what you've learned.
+            </p>
+        <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Register &raquo;</a>
+        </div>
+    </div>
 
     <blockquote>
         <i><p>Learning Log helps you keep track of your learning, for any topic you're interested in.</p></i>
     </blockquote>
     
-    <div id = "menu" style = "background-color:rgba(255, 255, 255, 0.5); float:left; width:200px; height:80vh;">
+{% endblock page_header %}
 
-        <h2>菜单</h2>
+{% block content %}
+    <div id = "menu" style = "background-color:rgba(255, 255, 255, 0.5); float:left; width:200px;">
+
+        <h2 style="color:rgba(5, 137, 199)">菜单</h2>
 
         <h3 style = "text-align:center;">
             <li><a href = "{% url 'learning_logs:topics' %}">主题</a></li>
         </h3>
     </div>
+{% endblock content %}
 
-{% endblock content1 %}
+

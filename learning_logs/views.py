@@ -11,20 +11,35 @@ def index(request):
     """学习笔记的主页"""
     return render(request, 'learning_logs/index.html')
 
-@login_required
+#@login_required
 def topics(request):
     """显示所有的主题"""
-    topics = Topic.objects.filter(owner = request.user).order_by('-date_added')
+    
+    # 先将所有公开主题放入
+    publicTopics = Topic.objects.filter(public = True)
+    
+    # 判断是否登录
+    if request.user.is_authenticated:
+        userTopics = Topic.objects.filter(owner = request.user)
+        # 将public为True的公开主题也加进来
+        topics = (userTopics | publicTopics).order_by('-date_added')
+        
+    # 若是未登录，只展示公开主题
+    else:
+        topics = publicTopics
+        
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
-@login_required
+#@login_required
 def topic(request, topic_id):
     """显示单个主题以及其所有的条目"""
     topic = Topic.objects.get(id = topic_id)
-     # 验证用户
-     
-    check_topic_owner(request, topic)
+    
+    # 如果是公开主题，就不验证用户
+    if topic.public != True:
+        check_topic_owner(request, topic)
+    
     
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
