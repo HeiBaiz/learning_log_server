@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "{% static 'css/start/base.css' %}">
+    <style>
+
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: rgba(117, 174, 237);
+        }
+
+        a:hover {
+            color: rgba(61, 53, 174);
+        }
+
+        .hidden {
+            display: none;
+          }
+    </style>
+</head>
+<body>
+
+    <div id = "container">
+        <div id = "header" style = "background-color: rgba(85, 133, 178, 0.2);">
+            <h1 style = "font-size: 42px; color: rgba(43, 83, 152, 1);">导航页</h1>
+            <p>
+                {% if user.is_authenticated %}
+                    <pre style="font-size:20px">  Ciallo～(∠・ω< )⌒★, {{ user.username }}</pre>
+                {% else %}
+                    -<a href="{% url 'accounts:register' %}" style="font-size:24px; color:rgba(57,197,187);"> Register</a>
+                    -<a href="{% url 'accounts:login' %}" style="font-size:24px; color:rgba(57,197,187);"> Log in</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <hr />
+                    <form action="{% url 'accounts:logout' %}" method='post'>
+                        {% csrf_token %}
+                        <button name='submit'>Log out</button>
+                    </form>
+                {% endif %}
+
+            </p>
+        </div>
+
+        <div id = "menu" style = "background-color: rgba(255, 255, 255, 0.5); width : 200px; height: 75vh; float: left;">
+            <h2 style = "font-size:24px; text-align:center; color:rgba(0, 162, 216)">菜单</h2>
+
+            <h3 class = hidden style = "font-size:24px; text-align:center;">
+                <a href = "{% url 'learning_logs:index' %}">Learning Logs</a>
+            </h3>
+
+            <h3 class = hidden style = "font-size:24px; text-align:center;">
+                <a href = "{% url 'learning_plans:index' %}">Learning Plans</a>
+            </h3>
+
+        </div>
+
+        <div id = "content" style = "background-color: rgba(255, 255, 255, 0.5);">
+
+        </div>
+
+        <div id = "footer" style = "background-color: rgba(255, 255, 255, 0.5);">
+
+        </div>
+
+    </div>
+
+    {% block content %} {% endblock content %}
+    
+</body>
+
+<script>
+    // 获取所有标题元素
+    const titles = document.querySelectorAll('h2, h3');
+    // 设置每个标题显示的延迟（毫秒）
+    const delay = 1000; // 1秒
+   
+    // 遍历标题数组，并设置显示时间
+    titles.forEach((title, index) => {
+      setTimeout(() => {
+        title.classList.remove('hidden');
+      }, index * delay);
+    });
+</script>
+
+</html>
+
+

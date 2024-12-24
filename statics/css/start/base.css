@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* 设置背景图片 */
+    background-image: url('../../images/start/index.jpg');
+    /* 背景图片不重复 */
+    background-repeat: no-repeat;
+    /* 背景图片覆盖整个页面 */
+    background-size: cover;
+    /* 背景图片固定，不随页面滚动 */
+    background-attachment: fixed;
+    /* 设置背景颜色作为图片加载失败时的回退 */
+    background-color: #f0f0f0;
+}
+
+ /* 使用伪元素来创建半透明层 */
+ body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* 设置半透明背景色, 这里使用了rgba, 其中a代表透明度 */
+    background-color: rgba(255, 255, 255, 0.5); /* 白色, 50%透明度 */
+    /* 确保伪元素位于内容之下 */
+    z-index: -1;
+    /* 可选: 为了让伪元素能够正确覆盖整个body, 确保body有正确的定位 */
+    pointer-events: none; /* 防止伪元素干扰鼠标事件 */
+}
